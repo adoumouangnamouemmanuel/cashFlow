@@ -5,27 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="18520b2c-77a6-4c9d-8131-0ef6f2a9c8e5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cashFlow.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Admin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AfricanMoneyTransferApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/BankAccount.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/BankAccountLinking.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FileUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/LanguageManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Localizable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Notifiable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/NotificationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Transactable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Transaction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TransferService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +82,7 @@
       <option name="presentableId" value="Default" />
       <updated>1732202074953</updated>
       <workItem from="1732202076012" duration="811000" />
-      <workItem from="1732645650877" duration="3135000" />
+      <workItem from="1732645650877" duration="3883000" />
     </task>
     <servers />
   </component>

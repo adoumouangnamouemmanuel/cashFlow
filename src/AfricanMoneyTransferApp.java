@@ -9,13 +9,8 @@ public class AfricanMoneyTransferApp {
     public static void main(String[] args) {
         loadUsers();
         while (true) {
-            System.out.println("1. Login");
-            System.out.println("2. Register");
-            System.out.println("3. Exit");
-            System.out.print("Enter your choice: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
-
+            displayMainMenu();
+            int choice = getUserChoice();
             switch (choice) {
                 case 1:
                     User currentUser = login();
@@ -35,25 +30,48 @@ public class AfricanMoneyTransferApp {
         }
     }
 
+    private static void displayMainMenu() {
+        System.out.println("\n===== African Money Transfer App =====");
+        System.out.println("1. Login");
+        System.out.println("2. Register");
+        System.out.println("3. Exit");
+        System.out.print("Enter your choice: ");
+    }
+
+    private static int getUserChoice() {
+        while (!scanner.hasNextInt()) {
+            System.out.println("Invalid input. Please enter a number.");
+            scanner.next();
+        }
+        return scanner.nextInt();
+    }
+
     private static void loadUsers() {
         List<User> users = FileUtil.loadUsers();
-        for (User user : users) {
-            transferService.addUser(user);
+        if (users.isEmpty()) {
+            System.out.println("No existing users found. Starting with an empty user list.");
+        } else {
+            for (User user : users) {
+                transferService.addUser(user);
+            }
+            System.out.println("Loaded " + users.size() + " user(s) from file.");
         }
     }
 
     private static void register() {
-        System.out.println("Enter user ID:");
+        scanner.nextLine(); // Consume newline
+        System.out.println("\n===== User Registration =====");
+        System.out.print("Enter user ID: ");
         String userID = scanner.nextLine();
-        System.out.println("Enter name:");
+        System.out.print("Enter name: ");
         String name = scanner.nextLine();
-        System.out.println("Enter email:");
+        System.out.print("Enter email: ");
         String email = scanner.nextLine();
-        System.out.println("Enter phone number:");
+        System.out.print("Enter phone number: ");
         String phoneNumber = scanner.nextLine();
-        System.out.println("Enter country:");
+        System.out.print("Enter country: ");
         String country = scanner.nextLine();
-        System.out.println("Enter password:");
+        System.out.print("Enter password: ");
         String password = scanner.nextLine();
 
         User newUser = new User(userID, name, email, phoneNumber, country, password);
@@ -61,13 +79,15 @@ public class AfricanMoneyTransferApp {
         List<User> users = FileUtil.loadUsers();
         users.add(newUser);
         FileUtil.saveUsers(users);
-        System.out.println("Registration successful!");
+        System.out.println("Registration successful! Your initial balance is 500.");
     }
 
     private static User login() {
-        System.out.println("Enter your user ID:");
+        scanner.nextLine(); // Consume newline
+        System.out.println("\n===== User Login =====");
+        System.out.print("Enter your user ID: ");
         String userID = scanner.nextLine();
-        System.out.println("Enter your password:");
+        System.out.print("Enter your password: ");
         String password = scanner.nextLine();
 
         User user = transferService.getUser(userID);
@@ -82,7 +102,7 @@ public class AfricanMoneyTransferApp {
 
     private static void showMenu(User user) {
         while (true) {
-            System.out.println("\n" + languageManager.getTranslation("WELCOME", user.getLanguagePreference()));
+            System.out.println("\n===== " + languageManager.getTranslation("WELCOME", user.getLanguagePreference()) + " =====");
             System.out.println("1. " + languageManager.getTranslation("MENU_CHECK_BALANCE", user.getLanguagePreference()));
             System.out.println("2. " + languageManager.getTranslation("MENU_SEND_MONEY", user.getLanguagePreference()));
             System.out.println("3. " + languageManager.getTranslation("MENU_TRANSACTION_HISTORY", user.getLanguagePreference()));
@@ -90,7 +110,7 @@ public class AfricanMoneyTransferApp {
             System.out.println("5. " + languageManager.getTranslation("MENU_EXIT", user.getLanguagePreference()));
             System.out.print("Enter your choice: ");
 
-            int choice = scanner.nextInt();
+            int choice = getUserChoice();
             scanner.nextLine(); // Consume newline
 
             switch (choice) {
@@ -115,14 +135,16 @@ public class AfricanMoneyTransferApp {
     }
 
     private static void checkBalance(User user) {
+        System.out.println("\n===== Balance Check =====");
         System.out.println(languageManager.getTranslation("BALANCE", user.getLanguagePreference()) +
-                ": " + user.getBalance()+" GHS");
+                ": " + user.getBalance());
     }
 
     private static void sendMoney(User sender) {
-        System.out.println("Enter recipient's user ID:");
+        System.out.println("\n===== Send Money =====");
+        System.out.print("Enter recipient's user ID: ");
         String recipientID = scanner.nextLine();
-        System.out.println("Enter amount to send:");
+        System.out.print("Enter amount to send: ");
         double amount = scanner.nextDouble();
         scanner.nextLine(); // Consume newline
 
@@ -133,7 +155,8 @@ public class AfricanMoneyTransferApp {
     }
 
     private static void changeLanguage(User user) {
-        System.out.println("Select language (English/French/Spanish):");
+        System.out.println("\n===== Change Language =====");
+        System.out.print("Select language (English/French/Spanish): ");
         String language = scanner.nextLine();
         user.setLanguagePreference(language);
     }

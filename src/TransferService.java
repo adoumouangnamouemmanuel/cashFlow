@@ -2,11 +2,14 @@ import java.util.*;
 
 public class TransferService {
     private Map<String, User> users;
-    private List<Transaction> transactions;
+    private Map<String, List<Transaction>> transactionHistory;
 
     public TransferService() {
         this.users = new HashMap<>();
-        this.transactions = new ArrayList<>();
+        this.transactionHistory = FileUtil.loadTransactions();
+        if (this.transactionHistory == null) {
+            this.transactionHistory = new HashMap<>();
+        }
     }
 
     public void addUser(User user) {
@@ -31,13 +34,20 @@ public class TransferService {
         sender.deductBalance(amount);
         receiver.addBalance(amount);
         transaction.setStatus("Completed");
-        transactions.add(transaction);
-        sender.addTransaction(transaction);
-        receiver.addTransaction(transaction);
+
+        addTransactionToHistory(senderID, transaction);
+        addTransactionToHistory(receiverID, transaction);
+
+        FileUtil.saveUsers(new ArrayList<>(users.values()));
+        FileUtil.saveTransactions(transactionHistory);
 
         System.out.println("Transaction completed successfully");
         System.out.println(transaction);
         return true;
+    }
+
+    private void addTransactionToHistory(String userID, Transaction transaction) {
+        transactionHistory.computeIfAbsent(userID, k -> new ArrayList<>()).add(transaction);
     }
 
     public void printUserBalance(String userID) {
@@ -50,14 +60,14 @@ public class TransferService {
     }
 
     public void printTransactionHistory(String userID) {
-        User user = users.get(userID);
-        if (user != null) {
-            System.out.println("Transaction History for " + user.getName() + ":");
-            for (Transaction transaction : user.getTransactionHistory()) {
+        List<Transaction> userTransactions = transactionHistory.get(userID);
+        if (userTransactions != null && !userTransactions.isEmpty()) {
+            System.out.println("Transaction History for " + users.get(userID).getName() + ":");
+            for (Transaction transaction : userTransactions) {
                 System.out.println(transaction);
             }
         } else {
-            System.out.println("User not found");
+            System.out.println("No transaction history found for this user.");
         }
     }
 

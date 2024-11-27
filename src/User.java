@@ -19,7 +19,7 @@ public class User implements Notifiable, Localizable {
         this.phoneNumber = phoneNumber;
         this.country = country;
         this.languagePreference = "English";
-        this.balance = 0.0;
+        this.balance = 500.0;
         this.password = password;
         this.transactionHistory = new ArrayList<>();
     }
